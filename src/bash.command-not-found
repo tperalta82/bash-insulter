@@ -75,11 +75,12 @@ print_message () {
     # Seed RANDOM with an integer of some length
     RANDOM=$(od -vAn -N4 -tu < /dev/urandom)
 
-    # Print a randomly selected message, but only about half the time to annoy the user a
-    # little bit less.
+    # Say a randomly selected message, but only about half the time to annoy the user a
+    # little bit less. Verify google-speech Python library is available.
     if [[ $((${RANDOM} % 2)) -lt 1 ]]; then
         message=${messages[${RANDOM} % ${#messages[@]}]}
-        printf "\n  $(tput bold)$(tput setaf 1)${message}$(tput sgr0)\n\n"
+        #printf "\n  $(tput bold)$(tput setaf 1)${message}$(tput sgr0)\n\n"
+        google_speech -v "warning" -l "en-nz" "${message}"
     fi
 }
 

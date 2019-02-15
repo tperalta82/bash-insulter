@@ -27,12 +27,13 @@ noob@bender:~ $ sp aux
 
 # Installation
 
-    # Method 1 - know what you are doing
-    git clone https://github.com/hkbakke/bash-insulter.git bash-insulter
-    sudo cp bash-insulter/src/bash.command-not-found /etc/
+    # Install google-speech Python3 library
+    pip3 install google-speech
+    
+    # Clone this repo, add a softlink in /etc, and add permissions
+    sudo ln -sf bash-insulter/src/bash.command-not-found /etc/bash.command-not-found
+    chmod u+x bash-insulter/src/bash.command-not-found
 
-    # Method 2 - I don't care, insult me!
-    sudo wget -O /etc/bash.command-not-found https://raw.githubusercontent.com/hkbakke/bash-insulter/master/src/bash.command-not-found
 
 Then source the file automatically for new logins by adding the following to `/etc/bash.bashrc` or any of the other locations where you can configure your shell automatically during login (zsh have different config files):
 ```
@@ -40,7 +41,7 @@ if [ -f /etc/bash.command-not-found ]; then
     . /etc/bash.command-not-found
 fi
 ```
-Login again and type some invalid commands for the effects to be visible.
+Login again and type some invalid commands for the effects to be audible.
 
 # Configuration
 bash-insulter can be customized, or even be made polite and nice, by populating `CMD_NOT_FOUND_MSGS` or `CMD_NOT_FOUND_MSGS_APPEND` environment variables. The values should be arrays. `CMD_NOT_FOUND_MSGS` replaces the default messages, while `CMD_NOT_FOUND_MSGS_APPEND` appends more messages to the existing ones.
