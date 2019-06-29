@@ -34,7 +34,7 @@ noob@bender:~ $ sp aux
     sudo ln -sf bash-insulter/src/bash.command-not-found /etc/bash.command-not-found
     chmod u+x bash-insulter/src/bash.command-not-found
 
-    sudo apt-get install sox libsox-fmt-mp3
+    sudo apt-get install sox libsox-fmt-mp3 streamer imagick
 
 Then source the file automatically for new logins by adding the following to `/etc/bash.bashrc` or any of the other locations where you can configure your shell automatically during login (zsh have different config files):
 ```

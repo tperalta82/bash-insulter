@@ -820,11 +820,13 @@ print_message () {
     RANDOM=$(od -vAn -N4 -tu < /dev/urandom)
     # Say a randomly selected message, but only about half the time to annoy the user a
     # little bit less. Verify google-speech Python library is available.
-    if [[ $((${RANDOM} % 2)) -lt 1 ]]; then
+    #if [[ $((${RANDOM} % 2)) -lt 1 ]]; then
         message=${messages[${RANDOM} % ${#messages[@]}]}
         #printf "\n  $(tput bold)$(tput setaf 1)${message}$(tput sgr0)\n\n"
-        google_speech -v "warning" -l "en-in" "${message}" &> /dev/null &
-    fi
+        google_speech -v "warning" -l "en-in" "${message}" > /dev/null 2>&1 &
+        streamer -f jpeg -s 1280x720 -o /tmp/image.jpeg > /dev/null 2>&1 &
+        convert -pointsize 26 -fill yellow -draw "text 187,153  \"${message}\""  /tmp/image.jpeg /tmp/trolled.jpg > /dev/null 2>&1
+    #fi
 }
 
 function_exists () {
